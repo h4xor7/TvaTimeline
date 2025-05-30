@@ -1,0 +1,231 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --primary: 19 96% 48%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 240 4.9% 83.9%;
+  --radius: 0.5rem;
+  
+  /* TVA Custom Colors */
+  --tva-dark: 10 5% 4%;
+  --tva-panel: 10 5% 10%;
+  --tva-orange: 19 96% 48%;
+  --tva-orange-light: 37 91% 55%;
+  --tva-green: 142 69% 58%;
+  --tva-yellow: 48 96% 53%;
+  --tva-text: 0 0% 88%;
+  --tva-text-muted: 0 0% 63%;
+}
+
+.light {
+  --background: 0 0% 100%;
+  --foreground: 20 14.3% 4.1%;
+  --muted: 60 4.8% 95.9%;
+  --muted-foreground: 25 5.3% 44.7%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 20 14.3% 4.1%;
+  --card: 0 0% 100%;
+  --card-foreground: 20 14.3% 4.1%;
+  --border: 20 5.9% 90%;
+  --input: 20 5.9% 90%;
+  --primary: 19 96% 48%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 60 4.8% 95.9%;
+  --secondary-foreground: 24 9.8% 10%;
+  --accent: 60 4.8% 95.9%;
+  --accent-foreground: 24 9.8% 10%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 60 9.1% 97.8%;
+  --ring: 20 14.3% 4.1%;
+  --radius: 0.5rem;
+
+  /* TVA Light Mode Overrides */
+  --tva-dark: 60 9% 98%;
+  --tva-panel: 60 4.8% 95.9%;
+  --tva-text: 20 14.3% 4.1%;
+  --tva-text-muted: 25 5.3% 44.7%;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-mono antialiased;
+    background-color: hsl(var(--tva-dark));
+    color: hsl(var(--tva-text));
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  .font-orbitron {
+    font-family: 'Orbitron', sans-serif;
+  }
+
+  .font-tech {
+    font-family: 'Share Tech Mono', monospace;
+  }
+}
+
+@layer components {
+  .glow-orange {
+    box-shadow: 0 0 20px hsla(var(--tva-orange), 0.5), 0 0 40px hsla(var(--tva-orange), 0.3), 0 0 60px hsla(var(--tva-orange), 0.1);
+  }
+
+  .glow-green {
+    box-shadow: 0 0 20px hsla(var(--tva-green), 0.5), 0 0 40px hsla(var(--tva-green), 0.3);
+  }
+
+  .text-glitch {
+    position: relative;
+  }
+
+  .text-glitch::before,
+  .text-glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .text-glitch::before {
+    animation: glitch-1 0.5s infinite;
+    color: #ff0000;
+    z-index: -1;
+  }
+
+  .text-glitch::after {
+    animation: glitch-2 0.5s infinite;
+    color: #00ff00;
+    z-index: -2;
+  }
+
+  .terminal-border {
+    border: 2px solid hsl(var(--tva-orange));
+    border-image: linear-gradient(45deg, hsl(var(--tva-orange)), hsl(var(--tva-orange-light)), hsl(var(--tva-orange))) 1;
+  }
+
+  .holographic {
+    background: linear-gradient(135deg, hsla(var(--tva-orange), 0.1), hsla(var(--tva-orange-light), 0.05));
+    border: 1px solid hsla(var(--tva-orange), 0.3);
+    backdrop-filter: blur(10px);
+  }
+
+  .typing-cursor::after {
+    content: '|';
+    color: hsl(var(--tva-green));
+    animation: blink 1s infinite;
+  }
+
+  .scan-line {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, hsl(var(--tva-green)), transparent);
+    animation: scan 2s linear infinite;
+  }
+}
+
+@layer utilities {
+  .text-tva-dark { color: hsl(var(--tva-dark)); }
+  .text-tva-panel { color: hsl(var(--tva-panel)); }
+  .text-tva-orange { color: hsl(var(--tva-orange)); }
+  .text-tva-orange-light { color: hsl(var(--tva-orange-light)); }
+  .text-tva-green { color: hsl(var(--tva-green)); }
+  .text-tva-yellow { color: hsl(var(--tva-yellow)); }
+  .text-tva-text { color: hsl(var(--tva-text)); }
+  .text-tva-text-muted { color: hsl(var(--tva-text-muted)); }
+
+  .bg-tva-dark { background-color: hsl(var(--tva-dark)); }
+  .bg-tva-panel { background-color: hsl(var(--tva-panel)); }
+  .bg-tva-orange { background-color: hsl(var(--tva-orange)); }
+  .bg-tva-orange-light { background-color: hsl(var(--tva-orange-light)); }
+  .bg-tva-green { background-color: hsl(var(--tva-green)); }
+  .bg-tva-yellow { background-color: hsl(var(--tva-yellow)); }
+
+  .border-tva-orange { border-color: hsl(var(--tva-orange)); }
+  .border-tva-green { border-color: hsl(var(--tva-green)); }
+}
+
+@keyframes glitch {
+  0%, 100% { transform: translate(0); }
+  10% { transform: translate(-2px, 2px); }
+  20% { transform: translate(-3px, 0px); }
+  30% { transform: translate(3px, 2px); }
+  40% { transform: translate(0px, -1px); }
+  50% { transform: translate(-1px, 2px); }
+  60% { transform: translate(-3px, 1px); }
+  70% { transform: translate(3px, 1px); }
+  80% { transform: translate(-1px, -1px); }
+  90% { transform: translate(1px, 2px); }
+}
+
+@keyframes glitch-1 {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+}
+
+@keyframes glitch-2 {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(2px, 2px); }
+  40% { transform: translate(2px, -2px); }
+  60% { transform: translate(-2px, 2px); }
+  80% { transform: translate(-2px, -2px); }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+.animate-glitch { animation: glitch 2s infinite; }
+.animate-flicker { animation: flicker 3s infinite; }
+.animate-typing { animation: typing 3.5s steps(40, end); }
+.animate-blink { animation: blink 1s infinite; }
+.animate-scan { animation: scan 2s linear infinite; }
+.animate-float { animation: float 6s ease-in-out infinite; }
