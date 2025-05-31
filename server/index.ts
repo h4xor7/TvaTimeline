@@ -1,70 +1,105 @@
-import express, { type Request, Response, NextFunction } from "express";
+import express from "express";
+import http from "http"; // Import the http module
 import { registerRoutes } from "./routes";
-import { setupVite, serveStatic, log } from "./vite";
+import { setupVite, serveStatic } from "./vite";
 
 const app = express();
+const server = http.createServer(app); // Create the server instance here
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use((req, res, next) => {
-  const start = Date.now();
-  const path = req.path;
-  let capturedJsonResponse: Record<string, any> | undefined = undefined;
+// Add a simple test route first
+app.get('/test', (req, res) => {
+  console.log('Test route accessed');
+  res.json({ message: 'Server is working!' });
+});
 
-  const originalResJson = res.json;
-  res.json = function (bodyJson, ...args) {
-    capturedJsonResponse = bodyJson;
-    return originalResJson.apply(res, [bodyJson, ...args]);
-  };
+// Add a simple HTML test route
+app.get('/simple', (req, res) => {
+  res.send(`
+    <!DOCTYPE html>
+    <html>
+    <head><title>Simple Test</title></head>
+    <body>
+      <h1>Simple HTML Test</h1>
+      <p>If you see this, basic Express routing works!</p>
+    </body>
+    </html>
+  `);
+});
 
-  res.on("finish", () => {
-    const duration = Date.now() - start;
-    if (path.startsWith("/api")) {
-      let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
-      if (capturedJsonResponse) {
-        logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
-      }
 
-      if (logLine.length > 80) {
-        logLine = logLine.slice(0, 79) + "…";
-      }
-
-      log(logLine);
-    }
-  });
-
+// Add a catch-all debug route
+app.use('*', (req, res, next) => {
+  console.log(`Request received: ${req.method} ${req.originalUrl}`);
   next();
 });
 
-(async () => {
+/* (async () => {
+  console.log('Starting server setup...');
+  
   const server = await registerRoutes(app);
+  console.log('Routes registered...');
 
-  app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
-    const status = err.status || err.statusCode || 500;
-    const message = err.message || "Internal Server Error";
-
-    res.status(status).json({ message });
-    throw err;
-  });
-
-  // importantly only setup vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
-  if (app.get("env") === "development") {
-    await setupVite(app, server);
+  if (process.env.NODE_ENV === "development") {
+    console.log('Setting up Vite for development...');
+    try {
+      await setupVite(app, server);
+      console.log('Vite setup complete...');
+    } catch (error) {
+      console.error('Vite setup failed:', error);
+    }
   } else {
+    console.log('Setting up static files...');
     serveStatic(app);
   }
 
-  // ALWAYS serve the app on port 5000
-  // this serves both the API and the client.
-  // It is the only port that is not firewalled.
   const port = 5000;
-  server.listen({
-    port,
-    host: "0.0.0.0",
-    reusePort: true,
-  }, () => {
-    log(`serving on port ${port}`);
+  server.listen(port, "0.0.0.0", () => {
+    console.log(`✅ Server running on http://localhost:${port}`);
+    console.log(`✅ Test endpoint: http://localhost:${port}/test`);
+    console.log(`✅ Simple HTML: http://localhost:${port}/simple`);
   });
-})();
+})().catch(error => {
+  console.error('❌ Server startup failed:', error);
+}); */
+
+
+
+// CORRECTED STARTUP LOGIC
+(async () => {
+  console.log('Starting server setup...');
+
+  if (process.env.NODE_ENV === "development") {
+    console.log('Setting up Vite for development...');
+    // 1. SETUP VITE FIRST
+    // This adds the Vite middleware to handle frontend requests.
+    try {
+      await setupVite(app, server);
+      console.log('Vite setup complete...');
+    } catch (error) {
+      console.error('Vite setup failed:', error);
+      process.exit(1); // Exit if Vite fails
+    }
+  } else {
+    console.log('Setting up static files for production...');
+    serveStatic(app);
+  }
+
+  // 2. REGISTER API ROUTES SECOND
+  // Requests that are not handled by Vite (like /api/...) will fall through to here.
+  registerRoutes(app); // This should just add routes to 'app', not return a server
+  console.log('Routes registered...');
+
+
+  const port = 5000;
+  server.listen(port, "0.0.0.0", () => {
+    console.log(`✅ Server running on http://localhost:${port}`);
+    console.log(`✅ Test endpoint: http://localhost:${port}/test`);
+    console.log(`✅ Simple HTML: http://localhost:${port}/simple`);
+  });
+})().catch(error => {
+  console.error('❌ Server startup failed:', error);
+  process.exit(1);
+});
