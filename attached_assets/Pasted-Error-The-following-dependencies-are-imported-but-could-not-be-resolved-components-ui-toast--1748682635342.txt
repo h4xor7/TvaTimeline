@@ -1,0 +1,21 @@
+Error: The following dependencies are imported but could not be resolved:
+
+  @/components/ui/toast (imported by C:/Users/saura/IdeaProjects/DevTimeline/DevTimeline/client/src/components/ui/toaster.tsx)
+  @/lib/utils (imported by C:/Users/saura/IdeaProjects/DevTimeline/DevTimeline/client/src/components/ui/tooltip.tsx)
+  @/hooks/use-toast (imported by C:/Users/saura/IdeaProjects/DevTimeline/DevTimeline/client/src/components/missions/CommunicationProtocol.tsx)
+  @/components/ui/button (imported by C:/Users/saura/IdeaProjects/DevTimeline/DevTimeline/client/src/components/missions/CommunicationProtocol.tsx)
+  @/hooks/useTypingEffect (imported by C:/Users/saura/IdeaProjects/DevTimeline/DevTimeline/client/src/components/LoginTerminal.tsx)
+  @/hooks/useGameState (imported by C:/Users/saura/IdeaProjects/DevTimeline/DevTimeline/client/src/components/MainInterface.tsx)
+  @/lib/github-api (imported by C:/Users/saura/IdeaProjects/DevTimeline/DevTimeline/client/src/components/missions/Deployments.tsx)
+  @/components/ui/input (imported by C:/Users/saura/IdeaProjects/DevTimeline/DevTimeline/client/src/components/missions/CommunicationProtocol.tsx)
+  @/components/ui/textarea (imported by C:/Users/saura/IdeaProjects/DevTimeline/DevTimeline/client/src/components/missions/CommunicationProtocol.tsx)
+  @/hooks/useTerminal (imported by C:/Users/saura/IdeaProjects/DevTimeline/DevTimeline/client/src/components/TerminalCommand.tsx)
+  @/components/ui/label (imported by C:/Users/saura/IdeaProjects/DevTimeline/DevTimeline/client/src/components/missions/CommunicationProtocol.tsx)
+  @/components/ui/checkbox (imported by C:/Users/saura/IdeaProjects/DevTimeline/DevTimeline/client/src/components/missions/CommunicationProtocol.tsx)
+  @/components/ui/select (imported by C:/Users/saura/IdeaProjects/DevTimeline/DevTimeline/client/src/components/missions/CommunicationProtocol.tsx)
+  @/lib/queryClient (imported by C:/Users/saura/IdeaProjects/DevTimeline/DevTimeline/client/src/components/missions/CommunicationProtocol.tsx)
+
+Are they installed?
+    at <anonymous> (C:\Users\saura\IdeaProjects\DevTimeline\DevTimeline\node_modules\vite\dist\node\chunks\dep-C6uTJdX2.js:50669:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async <anonymous> (C:\Users\saura\IdeaProjects\DevTimeline\DevTimeline\node_modules\vite\dist\node\chunks\dep-C6uTJdX2.js:50174:26)

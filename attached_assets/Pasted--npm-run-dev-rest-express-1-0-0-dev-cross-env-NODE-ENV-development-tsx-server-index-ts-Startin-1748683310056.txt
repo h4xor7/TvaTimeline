@@ -1,0 +1,32 @@
+ npm run dev
+
+> rest-express@1.0.0 dev
+> cross-env NODE_ENV=development tsx server/index.ts
+
+Starting server setup...
+Routes registered...
+Setting up Vite for development...
+Vite setup complete...
+✅ Server running on http://localhost:5000
+✅ Test endpoint: http://localhost:5000/test
+Error: The following dependencies are imported but could not be resolved:
+
+  @/components/ui/toast (imported by C:/Users/saura/IdeaProjects/DevTimeline/DevTimeline/client/src/components/ui/toaster.tsx)
+  @/components/ui/button (imported by C:/Users/saura/IdeaProjects/DevTimeline/DevTimeline/client/src/components/missions/Deployments.tsx)
+  @/hooks/use-toast (imported by C:/Users/saura/IdeaProjects/DevTimeline/DevTimeline/client/src/components/missions/CommunicationProtocol.tsx)
+  @/hooks/useTypingEffect (imported by C:/Users/saura/IdeaProjects/DevTimeline/DevTimeline/client/src/components/LoginTerminal.tsx)
+  @/lib/utils (imported by C:/Users/saura/IdeaProjects/DevTimeline/DevTimeline/client/src/components/ui/tooltip.tsx)  
+  @/hooks/useGameState (imported by C:/Users/saura/IdeaProjects/DevTimeline/DevTimeline/client/src/components/MainInterface.tsx)
+  @/components/ui/input (imported by C:/Users/saura/IdeaProjects/DevTimeline/DevTimeline/client/src/components/missions/CommunicationProtocol.tsx)
+  @/lib/github-api (imported by C:/Users/saura/IdeaProjects/DevTimeline/DevTimeline/client/src/components/missions/Deployments.tsx)
+  @/components/ui/textarea (imported by C:/Users/saura/IdeaProjects/DevTimeline/DevTimeline/client/src/components/missions/CommunicationProtocol.tsx)
+  @/components/ui/label (imported by C:/Users/saura/IdeaProjects/DevTimeline/DevTimeline/client/src/components/missions/CommunicationProtocol.tsx)
+  @/hooks/useTerminal (imported by C:/Users/saura/IdeaProjects/DevTimeline/DevTimeline/client/src/components/TerminalCommand.tsx)
+  @/components/ui/checkbox (imported by C:/Users/saura/IdeaProjects/DevTimeline/DevTimeline/client/src/components/missions/CommunicationProtocol.tsx)
+  @/components/ui/select (imported by C:/Users/saura/IdeaProjects/DevTimeline/DevTimeline/client/src/components/missions/CommunicationProtocol.tsx)
+  @/lib/queryClient (imported by C:/Users/saura/IdeaProjects/DevTimeline/DevTimeline/client/src/components/missions/CommunicationProtocol.tsx)
+
+Are they installed?
+    at <anonymous> (C:\Users\saura\IdeaProjects\DevTimeline\DevTimeline\node_modules\vite\dist\node\chunks\dep-C6uTJdX2.js:50669:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async <anonymous> (C:\Users\saura\IdeaProjects\DevTimeline\DevTimeline\node_modules\vite\dist\node\chunks\dep-C6uTJdX2.js:50174:26)
