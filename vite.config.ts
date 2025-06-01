@@ -22,7 +22,7 @@ export default defineConfig({
   },
 
   root: "client",
-
+  base: '/TvaTimeline/', // 👈 Must match the GitHub repo name
   build: {
 
     outDir: "../dist/public",
